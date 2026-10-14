@@ -1,0 +1,51 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse"
+          name="LoanAuditSeq">
+<property name="IntegrationName" value="LoanAuditSeq"/>
+<switch source="IntegrationName">
+
+    <case regex="PREMIUM">
+
+        <payloadFactory media-type="json">
+            <format>
+            {
+              "plan":"premium"
+            }
+            </format>
+            <args/>
+        </payloadFactory>
+
+    </case>
+
+    <case regex="STANDARD">
+
+        <payloadFactory media-type="json">
+            <format>
+            {
+              "plan":"standard"
+            }
+            </format>
+            <args/>
+        </payloadFactory>
+
+    </case>
+
+    <default>
+
+        <payloadFactory media-type="json">
+            <format>
+            {
+              "plan":"common"
+            }
+            </format>
+            <args/>
+        </payloadFactory>
+
+    </default>
+
+</switch>
+
+<respond/>
+
+    
+
+</sequence>

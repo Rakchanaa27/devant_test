@@ -1,0 +1,11 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse"
+          name="LoanValidationSeq">
+
+    
+
+    <log level="custom">
+        <property name="Status"
+                  value="Loan Request validated"/>
+    </log>
+<respond/>
+</sequence>

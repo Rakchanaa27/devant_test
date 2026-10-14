@@ -1,0 +1,33 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse"
+          name="LoanResponseSeq">
+
+    <filter source="IntegrationName" regex="true">
+
+    <then>
+
+        <log level="custom">
+            <property name="Status"
+                      value="Loan Eligible"/>
+        </log>
+
+    </then>
+
+    <else>
+
+        <payloadFactory media-type="json">
+            <format>
+            {
+              "message":"Loan Amount Exceeds Limit"
+            }
+            </format>
+            <args/>
+        </payloadFactory>
+
+        <respond/>
+
+    </else>
+
+</filter>
+
+
+</sequence>

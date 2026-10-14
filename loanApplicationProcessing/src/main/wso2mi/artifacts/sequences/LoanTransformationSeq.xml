@@ -1,0 +1,32 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse"
+          name="LoanTransformationSeq">
+          <log
+          level="full"/>
+    <script language="js"><![CDATA[
+        var payload = mc.getPayloadJSON();
+        if (payload && payload.customer && payload.customer.address) {
+            mc.setProperty('shippingAddress', payload.customer.address);
+        }
+    ]]></script>
+
+    <!-- customer.address may be missing in requests like {"plan":"premium"} -->
+    <filter source="get-property('shippingAddress')" regex=".+" xmlns="http://ws.apache.org/ns/synapse">
+        <then>
+            <enrich>
+                <source property="shippingAddress"
+                        type="property"/>
+                <target action="replace"
+                        xpath="json-eval($.shippingAddress)"
+                        type="custom"/>
+            </enrich>
+        </then>
+        <else>
+            <log level="custom">
+                <property name="LoanTransformationSeq" value="customer.address not provided; skipping shippingAddress replacement"/>
+            </log>
+        </else>
+    </filter>
+
+    <respond/>
+
+</sequence>

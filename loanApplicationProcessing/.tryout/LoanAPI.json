@@ -1,0 +1,21 @@
+{
+  "type": "API",
+  "requests": [],
+  "/apply": {
+    "requests": [
+      {
+        "name": "sample",
+        "contentType": "application/json",
+        "content": {
+          "loanRequest": {
+            "customer": "C100",
+            "amount": "500000"
+          }
+        },
+        "queryParams": {},
+        "pathParams": {}
+      }
+    ],
+    "defaultRequest": "sample"
+  }
+}
